@@ -38,17 +38,18 @@ Display.prototype.validate = function (book) {
     }
 }
 
-Display.prototype.show = function (type, message) {
+Display.prototype.show = function (type, dismessage) {
     let msg = document.getElementById("msg");
-    msg.innerHTML = `< div class="alert alert-${type} alert-dismissible fade show" role = "alert" >
-        <strong>${message}</strong> You should check in on some of those fields below.
-                            < button type = "button" class="close" data - dismiss="alert" aria - label="Close" >
-        <span aria-hidden="true">&times;</span>
-                            </button >
-                         </div >`
-setTimeout(function(){
-    message.innerHTML=""
-},5000);
+    console.log(msg);
+    msg.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+    <strong>${dismessage}</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>`
+    setTimeout(function () {
+        msg.innerHTML = ""
+    }, 50000);
 
 }
 
