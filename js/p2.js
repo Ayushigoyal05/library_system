@@ -17,7 +17,7 @@ Display.prototype.add = function (book) {
     <td>${book.author}</td>
     <td>${book.type}</td>
   </tr>`;
-  tablebody.innerHTML+=uistring;
+    tablebody.innerHTML += uistring;
 
 }
 
@@ -29,7 +29,28 @@ Display.prototype.clear = function () {
 // add methods to type
 // add submit form
 
+Display.prototype.validate = function (book) {
+    if (book.name.length < 2 || book.author.length < 2) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 
+Display.prototype.show = function (type, message) {
+    let msg = document.getElementById("msg");
+    msg.innerHTML = `< div class="alert alert-${type} alert-dismissible fade show" role = "alert" >
+        <strong>${message}</strong> You should check in on some of those fields below.
+                            < button type = "button" class="close" data - dismiss="alert" aria - label="Close" >
+        <span aria-hidden="true">&times;</span>
+                            </button >
+                         </div >`
+setTimeout(function(){
+    message.innerHTML=""
+},5000);
+
+}
 
 let libraryform = document.getElementById('libraryform');
 libraryform.addEventListener('submit', libraryformsubmit);
@@ -58,7 +79,16 @@ function libraryformsubmit(e) {
     console.log(book);
 
     let display = new Display();
-    display.add(book);
-    display.clear();
+    if (display.validate(book)) {
+        display.add(book);
+        display.clear();
+        display.show("success", "Your book has been added successfully");
+    }
+    else {
+        // shoe error to
+        display.show("danger", "sorry you canot add this book");
+    }
+
+
 
 }
